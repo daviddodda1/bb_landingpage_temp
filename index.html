@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Black Beard Development Group</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        font-family: "Lato", sans-serif;
+      }
+
+      /* Style the video: 100% width and height to cover the entire window */
+      #myVideo {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        min-width: 100%;
+        min-height: 100%;
+      }
+
+      .MainContainer {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        min-width: 100%;
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+        background-color: rgba(0, 0, 0, 0.4);
+        justify-content: space-between;
+      }
+
+      .HeroContainer {
+        min-height: 90vh;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .HeroText {
+        width: 45%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+      }
+
+      .footer {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 1rem;
+        display: flex;
+        justify-content: space-between;
+        color: #fff;
+        padding-right: 2rem;
+        padding-left: 2rem;
+        background-color: #000;
+      }
+
+      /* media querry for footer */
+      @media (max-width: 768px) {
+        .footer {
+          flex-direction: column;
+          align-items: center;
+        }
+        .HeroText {
+          width: 70%;
+        }
+      }
+
+      .ContactBtn {
+        background-color: #00ffc2;
+        color: #000;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 5px;
+        font-size: 1rem;
+        font-weight: 700;
+        margin-top: 1rem;
+        cursor: pointer;
+        transition: all 0.3s;
+      }
+
+      .ContactBtn:hover {
+        background-color: #00b277;
+        color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <video autoplay muted loop id="myVideo">
+      <source src="waves.webm" type="video/webm" />
+    </video>
+    <div class="MainContainer">
+      <div class="HeroContainer">
+        <div class="HeroText">
+          <img src="bb-logo-light.svg" alt="Logo" />
+          <a
+            href="mailto:info@blackbearddevelopmentgroup.com"
+            class="ContactBtn"
+            >Contact</a
+          >
+        </div>
+      </div>
+      <div class="footer">
+        <div>
+          Copyright Ⓒ 2022 Blackbeard Development Group. All Rights Reserved.
+        </div>
+        <div>2140 S. DuPont Hwy Camden, DE 19934</div>
+      </div>
+    </div>
+  </body>
+</html>

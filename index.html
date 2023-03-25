@@ -63,6 +63,7 @@
         flex-direction: column;
         background-color: rgba(0, 0, 0, 0.4);
         justify-content: space-between;
+        z-index: 999;
       }
 
       .HeroContainer {
@@ -122,12 +123,25 @@
         background-color: #00b277;
         color: #fff;
       }
+
+      #MainCanvas {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        min-width: 100%;
+        min-height: 100%;
+        opacity: 1;
+        z-index: 99;
+        mix-blend-mode: overlay;
+      }
     </style>
   </head>
   <body>
     <video autoplay muted loop id="myVideo">
       <source src="waves.webm" type="video/webm" />
     </video>
+
+    <div id="MainCanvas"></div>
     <div class="MainContainer">
       <div class="HeroContainer">
         <div class="HeroText">
@@ -146,5 +160,8 @@
         <div>2140 S. DuPont Hwy Camden, DE 19934</div>
       </div>
     </div>
+
+    <script src="p5.min.js"></script>
+    <script src="/index.js"></script>
   </body>
 </html>

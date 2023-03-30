@@ -42,6 +42,7 @@
         margin: 0;
         padding: 0;
         font-family: "Lato", sans-serif;
+        transition: all 0.2s;
       }
 
       /* Style the video: 100% width and height to cover the entire window */
@@ -61,9 +62,9 @@
         min-height: 100%;
         display: flex;
         flex-direction: column;
-        background-color: rgba(0, 0, 0, 0.4);
         justify-content: space-between;
         z-index: 999;
+        background-color: rgba(0, 0, 0, 0.5);
       }
 
       .HeroContainer {
@@ -85,6 +86,7 @@
       .footer {
         box-sizing: border-box;
         width: 100%;
+        min-height: 7vh;
         padding: 1rem;
         display: flex;
         justify-content: space-between;
@@ -95,13 +97,23 @@
       }
 
       /* media querry for footer */
-      @media (max-width: 768px) {
+      @media (max-width: 1000px) {
         .footer {
           flex-direction: column;
           align-items: center;
+          text-align: center;
+        }
+
+        .footer div {
+          margin-bottom: 1rem;
         }
         .HeroText {
           width: 70%;
+        }
+
+        .testing-drop-downs {
+          flex-direction: column;
+          align-items: center;
         }
       }
 
@@ -134,6 +146,174 @@
         z-index: 99;
         mix-blend-mode: overlay;
       }
+
+      .testing-drop-downs {
+        margin-top: 1rem;
+        display: flex;
+      }
+
+      .testing-drop-downs select {
+        background-color: #fff;
+        color: #000;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 5px;
+        font-size: 1rem;
+        font-weight: 700;
+        margin-top: 1rem;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-decoration: none;
+        margin-right: 1rem;
+        margin-left: 1rem;
+      }
+
+      .label_text {
+        color: #fff;
+        font-size: 1rem;
+        font-weight: 700;
+        margin-right: 1rem;
+        margin-left: 1rem;
+      }
+
+      .label_text_container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-left: 1rem;
+        margin-top: 1rem;
+      }
+
+      .noDisplay {
+        display: none !important;
+        opacity: 1 !important;
+      }
+
+      .ContactUsForm_Container {
+        margin: auto;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        width: 50%;
+        min-height: 92vh;
+        background-color: rgba(0, 0, 0, 1);
+        z-index: 999;
+        opacity: 0;
+        transform: translateY(-20%);
+      }
+
+      .ContactUsForm_LogoContainer {
+        width: 30vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .ContactUsForm_FromContainer h1 {
+        color: #fff;
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+      }
+
+      .ContactUsForm_LogoContainer img {
+        width: 100%;
+        margin-top: 2.5rem;
+      }
+
+      .ContactUsForm_FromContainer {
+        margin-top: 5rem;
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .ContactUsForm_InputContainer {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .ContactUsForm_FromContainer input,
+      textarea {
+        width: 100%;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        font-weight: 700;
+        color: #000;
+        background-color: #fff;
+      }
+
+      #SubmitFormBtn {
+        width: 70%;
+        background-color: #00ffc2;
+        color: #000;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 5px;
+        font-size: 1rem;
+        font-weight: 700;
+        margin-top: 1rem;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-decoration: none;
+        margin: auto;
+        display: block;
+        border: 2px solid #00ffc2;
+      }
+
+      #SubmitFormBtn:hover {
+        background-color: #000;
+        color: #00ffc2;
+      }
+
+      .ContactUsForm_Input_btnContainer {
+        width: 106%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .ContactUsForm_Input_btnContainer_close {
+        width: 28%;
+        background-color: #000;
+        color: #fff;
+        border: none;
+        padding: 15px 30px;
+        border-radius: 5px;
+        font-size: 1rem;
+        font-weight: 700;
+        margin-top: 1rem;
+        cursor: pointer;
+        transition: all 0.3s;
+        text-decoration: none;
+        margin: auto;
+        display: block;
+        border: 2px solid #fff;
+      }
+      .ContactUsForm_Input_btnContainer_close:hover {
+        background-color: #fff;
+        color: #000;
+      }
+
+      .ContactUsForm_InputContainer {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+      }
+
+      .Input_Main_Container {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
     </style>
   </head>
   <body>
@@ -142,15 +322,85 @@
     </video>
 
     <div id="MainCanvas"></div>
-    <div class="MainContainer">
+    <div class="MainContainer" id="MainContainer">
       <div class="HeroContainer">
         <div class="HeroText">
           <img src="bb-logo-light.svg" alt="Logo" />
-          <a
-            href="mailto:info@blackbearddevelopmentgroup.com"
-            class="ContactBtn"
-            >Contact</a
-          >
+          <button onclick="open_contact_form()" class="ContactBtn">
+            Contact
+          </button>
+          <div class="testing-drop-downs">
+            <!-- input drop down -->
+            <select
+              name="Show_Video"
+              onchange="update_video_state()"
+              id="Video_Display"
+            >
+              <option value="SHOW" selected>Show Video</option>
+              <option value="HIDE">Hide Video</option>
+            </select>
+
+            <select
+              name="Animation_Type"
+              id="Animation_Type"
+              onchange="update_animation()"
+            >
+              <option value="Animation_01" selected>Animation_01</option>
+              <option value="Animation_02">Animation_02</option>
+              <option value="Animation_03">Animation_03</option>
+              <option value="Animation_04">Animation_04</option>
+            </select>
+
+            <div class="label_text_container">
+              <input
+                type="checkbox"
+                name="User Intraction"
+                id="User_Intraction_Input"
+                onchange="update_user_intraction()"
+                checked
+              />
+              <label class="label_text" for="User_Intraction"
+                >Add a splash of green</label
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="ContactUsForm_Container noDisplay"
+        id="ContactUsForm_Container"
+      >
+        <div class="ContactUsForm_LogoContainer">
+          <img src="bb-logo-light.svg" alt="Logo" />
+        </div>
+        <div class="ContactUsForm_FromContainer">
+          <h1>Contact Us</h1>
+          <div class="Input_Main_Container">
+            <div class="ContactUsForm_InputContainer">
+              <input type="text" placeholder="Your Name" />
+            </div>
+            <div class="ContactUsForm_InputContainer">
+              <input type="text" placeholder="Your Email" />
+            </div>
+
+            <div class="ContactUsForm_InputContainer">
+              <textarea name="" id="" cols="30" rows="10"></textarea>
+            </div>
+            <div class="ContactUsForm_Input_btnContainer">
+              <button
+                href="#"
+                class="ContactUsForm_Input_btnContainer_close"
+                id="CloseFormBtn"
+                onclick="close_contact_form()"
+              >
+                Close
+              </button>
+              <button type="submit" value="Submit" id="SubmitFormBtn">
+                Submit
+              </button>
+            </div>
+          </div>
         </div>
       </div>
       <div class="footer">
@@ -162,6 +412,12 @@
     </div>
 
     <script src="p5.min.js"></script>
+    <script src="/animation_01.js"></script>
+    <script src="/animation_02.js"></script>
+    <script src="/animation_03.js"></script>
+    <script src="/animation_04.js"></script>
+    <script src="/Animation.js"></script>
+
     <script src="/index.js"></script>
   </body>
 </html>

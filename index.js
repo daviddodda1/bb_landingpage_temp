@@ -1,90 +1,106 @@
-// function setup() {
-//   var myCanvas = createCanvas(windowWidth, windowHeight);
-//   myCanvas.parent("MainCanvas");
-// }
+var userIntraction = true;
 
-// function draw() {
-//   background(0, 0, 0);
-//   fill(255);
-//   ellipse(mouseX, mouseY, 100, 100);
-// }
+function init() {
+  // Clear forms here
+  document.getElementById("Video_Display").value = "SHOW";
+  document.getElementById("myVideo").style.display = "block";
 
-let particles = [];
-let circleSize = 50; // The size of each circle
-let spacing = 60; // The spacing between circles
-let xMargin = 30; // The left and right margin
-let yMargin = 30; // The top and bottom margin
+  document.getElementById("User_Intraction_Input").checked = true;
+  userIntraction = true;
 
-function setup() {
-  var myCanvas = createCanvas(windowWidth, windowHeight);
-  myCanvas.parent("MainCanvas");
+  document.getElementById("MainContainer").backgroundColor =
+    "rgba(0, 0, 0, 0.5)";
 
-  let numCols = floor((width - 2 * xMargin) / spacing);
-  let numRows = floor((height - 2 * yMargin) / spacing);
-
-  for (let i = 0; i < numCols + 1; i++) {
-    for (let j = 0; j < numRows; j++) {
-      let x = xMargin + i * spacing;
-      let y = yMargin + j * spacing;
-
-      particles.push(new Particle(x, y));
-    }
-  }
-  noStroke();
+  update_animation();
 }
 
-let x_temp = 0;
-let temp_direction = 1;
+window.onload = init;
 
-function draw() {
-  background(0);
-
-  for (let i = 0; i < particles.length; i++) {
-    particles[i].update(windowHeight / 2, x_temp);
-    particles[i].display();
-  }
-  //   run code every 10 frames
-  if (frameCount % 100 == 0) {
-    if (x_temp > windowWidth && x_temp < 0) {
-      temp_direction *= -1;
-    }
-  }
-  x_temp += temp_direction;
+function update_user_intraction() {
+  userIntraction = !userIntraction;
+  setup();
 }
 
-class Particle {
-  constructor(x, y) {
-    this.pos = createVector(x, y);
+function update_video_state() {
+  const video_state = document.getElementById("Video_Display").value;
+  if (video_state == "SHOW") {
+    document.getElementById("myVideo").style.display = "block";
+    document.getElementById("MainCanvas").style.mixBlendMode = "overlay";
+    document.getElementById("MainCanvas").style.opacity = 1;
 
-    this.size = 50;
-    this.color = color(100);
+    document.getElementById("MainContainer").backgroundColor = rgba(
+      0,
+      0,
+      0,
+      0.5
+    );
+    document.getElementById("MainContainer").style.mixBlendMode = "none";
+
+    // document.getElementById("Video_Display").innerHTML = "Video Off";
+  } else {
+    document.getElementById("myVideo").style.display = "none";
+    document.getElementById("MainCanvas").style.mixBlendMode = "none";
+    document.getElementById("MainCanvas").style.opacity = 1;
+    document.getElementById("MainContainer").backgroundColor = rgba(
+      255,
+      255,
+      255,
+      1
+    );
+
+    // document.getElementById("myVideo").style[mix - blend - mode] = "none";
   }
+}
 
-  update(tx, ty) {
-    // update the size to look like a wave motion, both vertically and horizontally
-    // this.size =
-    //   circleSize +
-    //   50 * sin(frameCount * 0.05 + this.pos.x * 0.1) +
-    //   50 * sin(frameCount * 0.05 + this.pos.y * 0.1);
-    // calculate the distance between the mouse position and the particle's position
-    // update the size to look like a wave motion towards the mouse position
-    // this.size = circleSize + 10 * sin(frameCount * 0.05 + d * 0.1);
+var selected_animation = "Animation_01";
 
-    // change color based  on the distance between the mouse position and the particle's position
-    let d = dist(mouseX, mouseY, this.pos.x, this.pos.y);
+var animation_options = [
+  "Animation_01",
+  "Animation_02",
+  "Animation_03",
+  "Animation_04",
+];
 
-    // update size based on the distance between the mouse position and the particle's position
-    this.size = circleSize + 10 * sin(frameCount * 0.05 + d * 0.008);
+function update_animation() {
+  selected_animation = document.getElementById("Animation_Type").value;
+  setup();
+}
 
-    // map the distance to a value between 0 and 255
-    let dMappedColor = map(d, 0, 1000, 0, 255);
+// on page resize run this function
+function windowResized() {
+  setup();
+}
 
-    // update the color of the particle
-    this.color = color(255);
-  }
+// add a resize listener
+window.addEventListener("resize", windowResized);
 
-  display() {
-    fill(this.color);
-    ellipse(this.pos.x, this.pos.y, this.size, this.size);
-  }
+function close_contact_form() {
+  // add a noDisplay class to the contact form
+  document.getElementById("ContactUsForm_Container").style.opacity = 0;
+  document.getElementById("ContactUsForm_Container").style.transform =
+    "translateY(20%)";
+
+  setTimeout(() => {
+    document
+      .getElementById("ContactUsForm_Container")
+      .classList.add("noDisplay");
+    document.getElementById("ContactUsForm_Container").style.opacity = 1;
+    document.getElementById("ContactUsForm_Container").style.transform =
+      "translateY(-20%)";
+  }, 200);
+}
+
+function open_contact_form() {
+  document.getElementById("ContactUsForm_Container").style.opacity = 0;
+  document.getElementById("ContactUsForm_Container").style.transform =
+    "translateY(-20)";
+  // remove the noDisplay class from the contact form
+  document
+    .getElementById("ContactUsForm_Container")
+    .classList.remove("noDisplay");
+  setTimeout(() => {
+    document.getElementById("ContactUsForm_Container").style.opacity = 1;
+    document.getElementById("ContactUsForm_Container").style.transform =
+      "translateY(0)";
+  }, 100);
 }
